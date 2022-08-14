@@ -18,8 +18,8 @@ const Navbar = () => {
                 <li className='p-4'><button><Link to="home" smooth={true} duration={500}>Home</Link></button></li>
                 <li className='p-4'><button><Link to="about" smooth={true} offset={50} duration={500}>Explore</Link></button></li>
                 <li className='p-4'><button><Link to="contact" smooth={true} offset={50} duration={500}>Contact</Link></button></li>
-                <li className='p-4'><button className='w-[75px] rounded-lg font-medium bg-transparent hover:bg-[#00df9a] text-white hover:text-black border border-[#00df9a] hover:border-transparent'>
-                    <RouteLink to="/signin">Login</RouteLink></button>
+                <li className='p-4'><RouteLink to="/signin"><button className='w-[75px] rounded-lg font-medium bg-transparent hover:bg-[#00df9a] text-white hover:text-black border border-[#00df9a] hover:border-transparent'>
+                    Login</button></RouteLink>
                 </li>
             </ul>
             <div onClick={handleNav} className='block z-10 md:hidden'>
@@ -35,8 +35,8 @@ const Navbar = () => {
                 <li className='p-4'><button><Link to="home" smooth={true} duration={500} onClick={()=> setNav(false)}>Home</Link></button></li>
                 <li className='p-4'><button><Link to="about" smooth={true} offset={50} duration={500} onClick={()=> setNav(false)}>Explore</Link></button></li>
                 <li className='p-4'><button><Link to="contact" smooth={true} offset={50} duration={500} onClick={()=> setNav(false)}>Contact</Link></button></li>
-                <li className='p-4'><button className='w-[75px] rounded-lg font-medium bg-transparent hover:bg-[#00df9a] text-white hover:text-black border border-[#00df9a] hover:border-transparent'>
-                <RouteLink to="/signin" onClick={()=> setNav(false)}>Login</RouteLink></button>
+                <li className='p-4'><RouteLink to="/signin" onClick={()=> setNav(false)}><button className='w-[75px] rounded-lg font-medium bg-transparent hover:bg-[#00df9a] text-white hover:text-black border border-[#00df9a] hover:border-transparent'>
+                Login</button></RouteLink>
                 </li>
             </ul>
         </div>

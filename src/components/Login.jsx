@@ -30,7 +30,7 @@ const Login = () => {
             <img className='w-full h-screen object-cover' src={loginImg} alt="" />
         </div>
 
-        <div className='bg-white flex flex-col justify-center'>
+        <div className='bg-white h-screen flex flex-col justify-center'>
             <form className='max-w-[400px] w-full mx-auto bg-white p-4'>
                 <RouteLink to='/'><MdOutlineArrowBack size={25} /></RouteLink>
                 <h2 className='text-4xl font-bold text-center py-6'>SlideIt.</h2>

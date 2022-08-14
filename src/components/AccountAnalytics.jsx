@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from './Sidebar'
 
-const AccountDashboard = () => {
+const AccountAnalytics = () => {
   return (
     <div>
      <div className='flex min-h-[90vh]'>
@@ -10,7 +10,7 @@ const AccountDashboard = () => {
       </div>
       <div className='md:ml-[280px] mt-12 mx-3'>
         <div className='flex justify-start items-center'>
-          <h1 className='text-3xl my-5 font-bold text-zinc-700'>Dashboard</h1>
+          <h1 className='text-3xl my-5 font-bold text-zinc-700'>Analytics</h1>
         </div>
         <div>
           <p className='text-justify'>
@@ -38,4 +38,4 @@ const AccountDashboard = () => {
   )
 }
 
-export default AccountDashboard
+export default AccountAnalytics

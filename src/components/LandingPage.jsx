@@ -29,7 +29,7 @@ const LandingPage = () => {
           />
         </div>
         <p className='md:text-2xl z-10 text-m font-bold text-gray-500'>Generate the abstract/summarized view of your long lengthy documents in One Click.</p>
-        <button className='bg-[#00df9a] z-10 w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black'><RouteLink to='/signin'>Get Started</RouteLink></button>
+        <RouteLink to='/signin' className='z-10'><button className='bg-[#00df9a] w-[200px] z-10 rounded-md font-medium my-6 mx-auto py-3 text-black'>Get Started</button></RouteLink>
       </div>
       <div className='absolute bottom-6 justify-center items-center flex text-xs inset-x-0 text-gray-200'>
             <Link to="about" smooth={true} offset={50} duration={500}>
