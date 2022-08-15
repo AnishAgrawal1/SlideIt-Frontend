@@ -39,10 +39,10 @@ const Sidebar = () => {
     <div className=''>
         <div className='hidden md:flex'>
             <div className={`bg-black min-h-screen text-gray-100 px-4`}>
-                <h1 className={`text-3xl my-5 font-bold text-[#00df9a]`}>SlideIt.</h1>
+                <h1 className={`text-3xl my-5 ml-2 font-bold text-[#00df9a]`}>SlideIt.</h1>
                 <div className='items-center flex'>
                     <AiOutlineUser size={20} className='ml-2 mr-2' />
-                    <p className={`font-bold text-sm justify-start text-zinc-400`}>Welcome, {user?.displayName}</p>
+                    <p className={`font-bold text-sm mt-2 justify-start text-zinc-400`}>Welcome, {user?.displayName}</p>
                 </div>
                 <div className=" mt-4 flex flex-col gap-4 relative">
                 {menus?.map((menu, i) => (

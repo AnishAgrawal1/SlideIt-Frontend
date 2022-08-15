@@ -1,7 +1,17 @@
 import React from 'react'
 import Sidebar from './Sidebar'
+import { useState } from "react";
+import "./Dashboard.css";
+import FileUpload from './contentupload/fileupload';
 
 const AccountDashboard = () => {
+
+  const [toggleState, setToggleState] = useState(1);
+
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
+
   return (
     <div>
      <div className='flex min-h-[90vh]'>
@@ -12,26 +22,63 @@ const AccountDashboard = () => {
         <div className='flex justify-start items-center'>
           <h1 className='text-3xl my-5 font-bold text-zinc-700'>Dashboard</h1>
         </div>
-        <div>
-          <p className='text-justify'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, ea? Asperiores, sapiente nulla? Ex quos quis alias placeat nisi delectus corporis eveniet. Sapiente omnis voluptatem a at nihil, quisquam sunt.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore nihil expedita consectetur, laboriosam doloribus, voluptas ab aperiam aspernatur eius dolores autem modi incidunt quia sed in. Iusto quis et tempora?
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus tenetur error eveniet nesciunt eligendi possimus quis deleniti repellat, et dolore totam a sunt minima delectus, libero provident modi labore pariatur.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed non vitae aliquam, error tempore odit excepturi repudiandae laborum cum odio necessitatibus veniam explicabo, consequatur dignissimos. Similique, deleniti. Modi, repellendus vitae.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat excepturi aut perferendis illo corrupti sunt expedita, ratione, totam quibusdam illum beatae quisquam cum magnam et, sit fugiat. Ab, quos velit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus sequi labore tempore praesentium amet voluptatibus in eos hic blanditiis ipsam velit commodi voluptate laudantium natus, optio repellat quibusdam. Cum, delectus!
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab iure dignissimos voluptas minus ea nesciunt alias doloremque repellendus labore, at possimus eum sint fugiat sit vel fuga fugit hic nulla?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, delectus sequi. Laboriosam eaque aliquam itaque sunt, autem libero quos veniam minus similique mollitia ipsa voluptates, hic nobis provident velit esse?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, ea? Asperiores, sapiente nulla? Ex quos quis alias placeat nisi delectus corporis eveniet. Sapiente omnis voluptatem a at nihil, quisquam sunt.
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore nihil expedita consectetur, laboriosam doloribus, voluptas ab aperiam aspernatur eius dolores autem modi incidunt quia sed in. Iusto quis et tempora?
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus tenetur error eveniet nesciunt eligendi possimus quis deleniti repellat, et dolore totam a sunt minima delectus, libero provident modi labore pariatur.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed non vitae aliquam, error tempore odit excepturi repudiandae laborum cum odio necessitatibus veniam explicabo, consequatur dignissimos. Similique, deleniti. Modi, repellendus vitae.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat excepturi aut perferendis illo corrupti sunt expedita, ratione, totam quibusdam illum beatae quisquam cum magnam et, sit fugiat. Ab, quos velit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus sequi labore tempore praesentium amet voluptatibus in eos hic blanditiis ipsam velit commodi voluptate laudantium natus, optio repellat quibusdam. Cum, delectus!
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab iure dignissimos voluptas minus ea nesciunt alias doloremque repellendus labore, at possimus eum sint fugiat sit vel fuga fugit hic nulla?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, delectus sequi. Laboriosam eaque aliquam itaque sunt, autem libero quos veniam minus similique mollitia ipsa voluptates, hic nobis provident velit esse?
-          </p>
-        </div>
+          <div name="Upload Area" className=''>
+            <h2 className='font-bold text-lg mb-3'>Upload</h2>
+            <div className="container">
+              <div className="bloc-tabs">
+                <button
+                  className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
+                  onClick={() => toggleTab(1)}
+                >
+                  File Upload
+                </button>
+                <button
+                  className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
+                  onClick={() => toggleTab(2)}
+                >
+                  URL 
+                </button>
+                <button
+                  className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
+                  onClick={() => toggleTab(3)}
+                >
+                  Text Upload
+                </button>
+              </div>
+
+              <div className="content-tabs">
+                <div
+                  className={toggleState === 1 ? "content  active-content" : "content"}
+                >
+                  <FileUpload />
+                </div>
+
+                <div
+                  className={toggleState === 2 ? "content  active-content" : "content"}
+                >
+                  <p>
+                    {/* url Upload area */}
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
+                    voluptatum qui adipisci.
+                  </p>
+                </div>
+
+                <div
+                  className={toggleState === 3 ? "content  active-content" : "content"}
+                >
+                  <p>
+                    {/* text upload area */}
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos sed
+                    nostrum rerum laudantium totam unde adipisci incidunt modi alias!
+                    Accusamus in quia odit aspernatur provident et ad vel distinctio
+                    recusandae totam quidem repudiandae omnis veritatis nostrum
+                    laboriosam architecto optio rem, dignissimos voluptatum beatae
+                    aperiam voluptatem atque. Beatae rerum dolores sunt.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
      </div>
     </div>
