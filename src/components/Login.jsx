@@ -26,8 +26,8 @@ const Login = () => {
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
-        <div className='hidden sm:block'>
-            <img className='w-full h-screen object-cover' src={loginImg} alt="" />
+        <div className='hidden sm:block items-center p-40'>
+            <img className='w-[500px] h-[500px] object-cover' src={loginImg} alt="" />
         </div>
 
         <div className='bg-white h-screen flex flex-col justify-center'>
@@ -43,11 +43,12 @@ const Login = () => {
                     <input className='border p-2' type="password" />
                 </div>
                 <p className='flex items-center'><input className='mr-2' type="checkbox" /> Remember Me</p>
-                <button className='border rounded w-full my-5 py-2 bg-[#00df9a] hover:bg-[#21ac80] text-black'>Sign In</button>
-                <p className='flex justify-center text-zinc-500'>Or</p>
-                <div className='flex justify-center'><GoogleButton onClick={handleGoogleSignIn} /></div>
-                <p className='mt-5'>Don't have an account?</p>
-                <button className='border rounded-3xl w-full my-2 py-2 bg-[#B9D2D2] hover:bg-[#363535] text-black'>Sign Up With Google</button>
+                <button className='border rounded w-full my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black'>Sign In</button>
+                <p className='flex justify-center py-4 text-zinc-500'>Or</p>
+                <div className='flex justify-center'>
+                    <GoogleButton onClick={handleGoogleSignIn} />
+                    {/* <button className='border rounded w-full my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black' onClick={handleGoogleSignIn}>Sign In with Google</button> */}
+                </div>
             </form>
         </div>
     </div>

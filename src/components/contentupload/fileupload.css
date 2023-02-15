@@ -1,14 +1,13 @@
 .drop-file-input {
     position: relative;
-    width: 400px;
-    height: 200px;
+    width: auto;
+    height: auto;
     border: 2px dashed var(--border-color);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: var(--input-bg);
+    background-color: rgb(244, 244, 244);
 }
 
 .drop-file-input input {
@@ -54,7 +53,7 @@
     position: relative;
     display: flex;
     margin-bottom: 10px;
-    background-color: var(--input-bg);
+    background-color: rgb(246, 246, 246);
     padding: 15px;
     border-radius: 20px;
 }

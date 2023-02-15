@@ -1,10 +1,7 @@
 import { UserAuth } from '../context/AuthContext'
 import React, { useState } from "react";
 import { MdOutlineDashboard } from "react-icons/md";
-import { RiSettings4Line } from "react-icons/ri";
-import { TbReportAnalytics } from "react-icons/tb";
 import { AiOutlineUser, AiOutlineHeart, AiOutlineMenu, AiOutlineClose} from "react-icons/ai";
-import {FiFolder} from "react-icons/fi";
 import {BiLogOut} from "react-icons/bi"
 import { Link } from "react-router-dom";
 
@@ -28,10 +25,7 @@ const Sidebar = () => {
 
   const menus = [
     { name: "Dashboard", link: "/account", icon: MdOutlineDashboard },
-    { name: "Analytics", link: "/analytics", icon: TbReportAnalytics, margin: true },
-    { name: "Files", link: "/account", icon: FiFolder },
     { name: "Saved", link: "/account", icon: AiOutlineHeart, margin: true },
-    { name: "Settings", link: "/account", icon: RiSettings4Line },
   ];
   
 
@@ -76,14 +70,11 @@ const Sidebar = () => {
                 {nav ? <AiOutlineClose size={20}/> : <AiOutlineMenu size={20} />}
             </div>
         </div>
-        <ul className={nav ? 'md:hidden text-white fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-300' : 'ease-in-out duration-300 fixed left-[-100%] top-0'}>
+        <ul className={nav ? 'md:hidden text-white z-30 fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] ease-in-out duration-300' : 'z-30 ease-in-out duration-300 fixed left-[-100%] top-0'}>
                 <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>SlideIt.</h1>
                 <li><p className={`text-xs font-bold justify-start p-4 text-zinc-400`}>Welcome, {user?.displayName}</p></li>
                 <li className='p-4'><button><Link to="/account" smooth={true} duration={500} onClick={()=> setNav(false)}>Dashboard</Link></button></li>
-                <li className='p-4'><button><Link to="/analytics" smooth={true} duration={500} onClick={()=> setNav(false)}>Analytics</Link></button></li>
-                <li className='p-4'><button><Link to="/" smooth={true} duration={500} onClick={()=> setNav(false)}>Files</Link></button></li>
                 <li className='p-4'><button><Link to="/" smooth={true} duration={500} onClick={()=> setNav(false)}>Saved</Link></button></li>
-                <li className='p-4'><button><Link to="/" smooth={true} duration={500} onClick={()=> setNav(false)}>Settings</Link></button></li>
                 <li className='p-4'><button onClick={handleSignOut}><Link to="/" smooth={true} duration={500} onClick={()=> setNav(false)}>Logout</Link></button></li>
         </ul>
     </div>
