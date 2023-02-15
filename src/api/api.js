@@ -6,9 +6,9 @@ const api = axios.create({
   baseURL,
 });
 
-const postContent = async (content) => {
+export const postText = async (content) => {
   await api
-    .post("/predict",{
+    .post("/predict_text",{
         'data': content
     })
     .then((res) => {
@@ -19,4 +19,29 @@ const postContent = async (content) => {
     });
 };
 
-export default postContent;
+export const postUrl = async (content) => {
+  await api
+    .post("/predict_url",{
+        'url': content
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const postUpload = async (content) => {
+  await api
+    .post("/predict_upload",{
+        'upload': content
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
