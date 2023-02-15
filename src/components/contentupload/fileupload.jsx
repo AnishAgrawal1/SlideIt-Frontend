@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-
 import './fileupload.css';
-
 import { ImageConfig } from './ImageConfig'; 
 import uploadImg from '../../assets/cloud-upload-regular-240.png';
+import { Center } from '@chakra-ui/react';
 
 const FileUpload = props => {
 
@@ -44,8 +43,8 @@ const FileUpload = props => {
                 onDrop={onDrop}
             >
                 <div className="drop-file-input__label">
-                    <img src={uploadImg} alt="" />
-                    <p>Drag & Drop your files here</p>
+                    <Center><img src={uploadImg} alt="" /></Center>
+                    <p >Click to Upload or Drag & Drop your files here</p>
                 </div>
                 <input type="file" value="" onChange={onFileDrop}/>
             </div>

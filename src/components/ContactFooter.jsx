@@ -13,7 +13,7 @@ import Biraj from '../assets/biraj.png';
 
 const ContactFooter = () => {
   return (
-    <div name='contact' className='max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-4 gap-10 text-gray-300'>
+    <div name='contact' className='max-w mx-auto py-16 px-8 grid lg:grid-cols-4 gap-10 text-gray-300'>
       <div>
         <h1 className='w-full text-3xl font-bold text-[#00df9a]'>SlideIt</h1>
         <p className='py-4'>Any inquiry related to the Application or for further more information, you can feel free to contact us anytime. Do checkout the GitHub repository for the documentation.</p>
