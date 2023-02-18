@@ -24,7 +24,6 @@ const FileUpload = props => {
           const reader = new FileReader();
           reader.onload = (event) => {
             console.log(event.target.result);
-            // do something with the file content
           };
           reader.readAsText(newFile);
           const updatedList = [...fileList, newFile];
@@ -41,7 +40,7 @@ const FileUpload = props => {
     //         formData.append('file', newFile);
     
     //         try {
-    //             const response = await fetch('/api/upload', {
+    //             const response = await fetch('/predict_upload', {
     //                 method: 'POST',
     //                 body: formData
     //             });

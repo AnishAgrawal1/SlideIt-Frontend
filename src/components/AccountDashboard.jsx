@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
 import FileUpload from "./contentupload/fileupload";
-import { postText, postUrl } from "../api/api";
+import { postText, postUpload, postUrl } from "../api/api";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Spacer, Input } from '@chakra-ui/react'
 
 
@@ -10,8 +10,9 @@ const AccountDashboard = () => {
   
   const [fileContent, setFileContent] = useState(null);
 
-  function handleFileChange(content) {
-    setFileContent(content);
+  function handleFileChange(fileContent) {
+    setFileContent(fileContent);
+    postUpload(fileContent);
   }
   
   const [content, setContent] = useState('');
@@ -106,7 +107,7 @@ const AccountDashboard = () => {
                           rows="10"
                           placeholder="Insert your text here"
                           name="content"
-                          value={content}
+                          value={textcontent}
                           onChange={(e) => settextContent(e.target.value)}
                         ></textarea>
                         <button onClick={submittextContent} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">
