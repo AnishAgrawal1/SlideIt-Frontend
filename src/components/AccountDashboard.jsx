@@ -2,23 +2,34 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
 import FileUpload from "./contentupload/fileupload";
-import postContent from "../api/api";
+import { postText, postUrl } from "../api/api";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Spacer, Input } from '@chakra-ui/react'
 
 
 const AccountDashboard = () => {
-  const [content, setContent] = useState('');
-  const [toggleState, setToggleState] = useState(1);
   
-  const toggleTab = (index) => {
-    setToggleState(index);
-  };
+  const [fileContent, setFileContent] = useState(null);
+
+  function handleFileChange(content) {
+    setFileContent(content);
+  }
+  
+  const [content, setContent] = useState('');
   
   const submitContent = (e) => {
     e.preventDefault();
     console.log(content);
-    postContent(content);
+    postUrl(content);
   }
+
+  const [textcontent, settextContent] = useState('');
+  
+  const submittextContent = (e) => {
+    e.preventDefault();
+    console.log(textcontent);
+    postText(textcontent);
+  }
+
 
   return (
     <div>
@@ -28,7 +39,7 @@ const AccountDashboard = () => {
         </div>
         <div className="md:ml-[280px] mt-12 mx-3">
           <div className="flex justify-start items-center">
-            <h1 className="text-3xl my-5 font-bold text-zinc-700">Upload</h1>
+            <h1 className="md:text-3xl text-2xl my-5 ml-2 font-bold text-zinc-700">Convert any document to a Slide</h1>
           </div>
           <div name="Upload Area" className="">
             <div className="container" class="lg:w-[1180px] md:w-[620px] w-[460px]">
@@ -41,7 +52,7 @@ const AccountDashboard = () => {
                 <TabPanels>
                   <TabPanel>
                     <div>
-                    <FileUpload/>
+                      <FileUpload onFileChange={handleFileChange} />
                     </div>
                   </TabPanel>
                   <TabPanel>
@@ -53,9 +64,9 @@ const AccountDashboard = () => {
                               <div>
                                 <label className="py-2">URL</label>
                                 <Flex className="my-5">
-                                <Input className="border mr-3 w-full" size='md' placeholder="Enter URL here" type="text" />
+                                <Input onChange={(e) => setContent(e.target.value)} className="border mr-3 w-full" size='md' placeholder="Enter URL here" type="text" />
                                 <Spacer/>
-                                <button className="border rounded px-8 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">
+                                <button onClick={submitContent} className="border rounded px-8 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">
                                   Generate
                                 </button>
                                 </Flex>
@@ -96,16 +107,11 @@ const AccountDashboard = () => {
                           placeholder="Insert your text here"
                           name="content"
                           value={content}
-                          onChange={(e) => setContent(e.target.value)}
+                          onChange={(e) => settextContent(e.target.value)}
                         ></textarea>
-                        <button onClick={submitContent} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">
+                        <button onClick={submittextContent} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">
                           Generate
                         </button>
-                        {/* <a href="https://localhost:5000/presentation_pdfs/slides.pdf" download>
-                          <button className="border rounded w-full my-5 py-2 bg-[#00df9a] hover:bg-[#21ac80] text-black">
-                          Download
-                        </button>
-                        </a> */}
                       </div>
                     </div>
                   </TabPanel>

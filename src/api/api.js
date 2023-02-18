@@ -44,4 +44,3 @@ export const postUpload = async (content) => {
       console.log(err);
     });
 };
-

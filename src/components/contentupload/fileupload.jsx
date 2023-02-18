@@ -7,6 +7,7 @@ import { Center } from '@chakra-ui/react';
 
 const FileUpload = props => {
 
+
     const wrapperRef = useRef(null);
 
     const [fileList, setFileList] = useState([]);
@@ -20,11 +21,43 @@ const FileUpload = props => {
     const onFileDrop = (e) => {
         const newFile = e.target.files[0];
         if (newFile) {
-            const updatedList = [...fileList, newFile];
-            setFileList(updatedList);
-            props.onFileChange(updatedList);
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            console.log(event.target.result);
+            // do something with the file content
+          };
+          reader.readAsText(newFile);
+          const updatedList = [...fileList, newFile];
+          setFileList(updatedList);
+          props.onFileChange(updatedList);
         }
-    }
+      };
+       
+
+    // const onFileDrop = async (e) => {
+    //     const newFile = e.target.files[0];
+    //     if (newFile) {
+    //         const formData = new FormData();
+    //         formData.append('file', newFile);
+    
+    //         try {
+    //             const response = await fetch('/api/upload', {
+    //                 method: 'POST',
+    //                 body: formData
+    //             });
+    //             if (response.ok) {
+    //                 const data = await response.json();
+    //                 const updatedList = [...fileList, data.fileUrl];
+    //                 setFileList(updatedList);
+    //                 props.onFileChange(updatedList);
+    //             } else {
+    //                 console.error('Failed to upload file');
+    //             }
+    //         } catch (error) {
+    //             console.error('Failed to upload file', error);
+    //         }
+    //     }
+    // }    
 
     const fileRemove = (file) => {
         const updatedList = [...fileList];

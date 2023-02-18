@@ -1,7 +1,7 @@
 import { UserAuth } from '../context/AuthContext'
 import React, { useState } from "react";
 import { MdOutlineDashboard } from "react-icons/md";
-import { AiOutlineUser, AiOutlineHeart, AiOutlineMenu, AiOutlineClose} from "react-icons/ai";
+import {AiOutlineHeart, AiOutlineMenu, AiOutlineClose} from "react-icons/ai";
 import {BiLogOut} from "react-icons/bi"
 import { Link } from "react-router-dom";
 
@@ -34,9 +34,8 @@ const Sidebar = () => {
         <div className='hidden md:flex'>
             <div className={`bg-black min-h-screen text-gray-100 px-4`}>
                 <h1 className={`text-3xl my-5 ml-2 font-bold text-[#00df9a]`}>SlideIt.</h1>
-                <div className='items-center flex'>
-                    <AiOutlineUser size={20} className='ml-2 mr-2' />
-                    <p className={`font-bold text-sm mt-2 justify-start text-zinc-400`}>Welcome, {user?.displayName}</p>
+                <div className='items-center'>
+                    <p className={`font-bold text-sm mt-2 ml-2 justify-start text-zinc-400`}>Welcome, {user?.displayName}</p>
                 </div>
                 <div className=" mt-4 flex flex-col gap-4 relative">
                 {menus?.map((menu, i) => (
@@ -74,7 +73,7 @@ const Sidebar = () => {
                 <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>SlideIt.</h1>
                 <li><p className={`text-xs font-bold justify-start p-4 text-zinc-400`}>Welcome, {user?.displayName}</p></li>
                 <li className='p-4'><button><Link to="/account" smooth={true} duration={500} onClick={()=> setNav(false)}>Dashboard</Link></button></li>
-                <li className='p-4'><button><Link to="/" smooth={true} duration={500} onClick={()=> setNav(false)}>Saved</Link></button></li>
+                <li className='p-4'><button><Link to="/account" smooth={true} duration={500} onClick={()=> setNav(false)}>Saved</Link></button></li>
                 <li className='p-4'><button onClick={handleSignOut}><Link to="/" smooth={true} duration={500} onClick={()=> setNav(false)}>Logout</Link></button></li>
         </ul>
     </div>

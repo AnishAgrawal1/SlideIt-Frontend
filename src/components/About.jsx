@@ -9,10 +9,10 @@ const About = () => {
         <div className='max-w-[1240px] mx-auto grid md:grid-cols-2'>
           <img className='w-[500px] mx-auto my-4' src={Laptop} alt='/' />
           <div className='flex flex-col justify-center'>
-            <p className='text-[#00df9a] font-bold '>SlideIt DASHBOARD</p>
-            <h1 className='md:text-4xl sm:text-3xl text-2xl font-bold py-2'>Creating Slides is no more a Tedious Task</h1>
-            <p>
-              With SlideIt you'll be able to create slides of the articles or document you provide. Using NLP we are able to create the abstraction of the topics by the highest sentence ranking and selection.
+            <p className='text-[#00df9a] font-bold '>SlideIt Dashboard</p>
+            <h1 className='md:text-4xl sm:text-3xl text-2xl font-bold py-2'>Creating Slides is no more a tedious task</h1>
+            <p className='py-2'>
+              Creating a good presentation slide can be a daunting task even for the most professional designers. But don't worry, SlideIt comes equipped with AI technology that will helps you generate stunning presentations easily. Whether it is a group assignment, sales pitch or projects, SlideIt has it all. The best part is, it's free!
             </p>
           </div>
         </div>
@@ -21,7 +21,7 @@ const About = () => {
         <div className='max-w-[1240px] mx-auto grid md:grid-cols-2'>
           <div className='flex flex-col justify-center'>
             <h1 className='md:text-4xl sm:text-3xl text-2xl font-bold py-2'>Video Presentation of your Document</h1>
-            <p>
+            <p className='py-2'>
               Visualization have an advanced ability to understand, learn, and remember. Generate the video presentations of the slides using speech synthesis will help you to teach or learn documents in no time.
             </p>
           </div>
