@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import "./fileupload.css";
 import { ImageConfig } from "./ImageConfig";
 import uploadImg from "../../assets/cloud-upload-regular-240.png";
-import { Box, Center } from "@chakra-ui/react";
+import { Box, Button, Center } from "@chakra-ui/react";
+import { postUpload } from "../../api/api";
 // import {PDFWorker, getDocument, GlobalWorkerOptions} from "pdfjs-dist";
 
 // import pdfjsLib from "pdfjs-dist";
@@ -21,12 +22,13 @@ const FileUpload = (props) => {
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
   
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
+  // var fileContent = {};
+  const [fileContent, setFileContent] = useState({});
   
   const onFileDrop = (e) => {
     const newFile = e.target.files[0];
     const reader = new FileReader();
     reader.readAsArrayBuffer(newFile);
-    var fileContent = {};
 
     if (newFile) {
       reader.onload = (event) => {
@@ -201,6 +203,7 @@ const FileUpload = (props) => {
               </span>
             </div>
           ))}
+          <button onClick={()=>postUpload(fileContent)} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">Generate</button>
         </div>
       ) : null}
     </>
