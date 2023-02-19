@@ -2,11 +2,13 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
 import FileUpload from "./contentupload/fileupload";
+import LoadingSpin from "./LoadingSpin";
 import { postText, postUpload, postUrl } from "../api/api";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Spacer, Input } from '@chakra-ui/react'
 
 
 const AccountDashboard = () => {
+  const [loading, setLoading] = useState(false);
   
   const [fileContent, setFileContent] = useState(null);
 
@@ -21,6 +23,7 @@ const AccountDashboard = () => {
     e.preventDefault();
     console.log(content);
     postUrl(content);
+    setLoading(true);
   }
 
   const [textcontent, settextContent] = useState('');
@@ -29,6 +32,7 @@ const AccountDashboard = () => {
     e.preventDefault();
     console.log(textcontent);
     postText(textcontent);
+    setLoading(true);
   }
 
 
@@ -50,12 +54,15 @@ const AccountDashboard = () => {
                   <Tab className="mr-8">URL</Tab>
                   <Tab>Text</Tab>
                 </TabList>
+
                 <TabPanels>
+
                   <TabPanel>
                     <div>
                       <FileUpload onFileChange={handleFileChange} />
                     </div>
                   </TabPanel>
+
                   <TabPanel>
                     <div>
                       <p>
@@ -76,7 +83,9 @@ const AccountDashboard = () => {
                         </form>
                       </p>
                     </div>
+                    {loading && <LoadingSpin />}
                   </TabPanel>
+
                   <TabPanel>
                     <div class="flex justify-start">
                       <div class="mb-3 mx-3 w-[100%]">
@@ -115,6 +124,7 @@ const AccountDashboard = () => {
                         </button>
                       </div>
                     </div>
+                    {loading && <LoadingSpin />}
                   </TabPanel>
                 </TabPanels>
               </Tabs>
