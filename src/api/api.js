@@ -33,6 +33,7 @@ export const postUrl = async (content) => {
 };
 
 export const postUpload = async (content) => {
+  console.log("inside api.js");
   await api
     .post("/predict_upload",{
         'upload': content

@@ -13,8 +13,13 @@ const AccountDashboard = () => {
   const [fileContent, setFileContent] = useState(null);
 
   function handleFileChange(fileContent) {
+    console.log("inside handle file change")
     setFileContent(fileContent);
-    postUpload(fileContent);
+    console.log("file content updaded with value::");
+    console.log(fileContent);
+
+    // dont post the file contents here
+    // postUpload(fileContent);
   }
   
   const [content, setContent] = useState('');
