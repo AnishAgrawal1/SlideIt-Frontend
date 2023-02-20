@@ -16,6 +16,7 @@ const FileUpload = (props) => {
   const wrapperRef = useRef(null);
 
   const [fileList, setFileList] = useState([]);
+  const [fileLink, setFileLink] = useState("");
   
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
 
@@ -203,7 +204,8 @@ const FileUpload = (props) => {
               </span>
             </div>
           ))}
-          <button onClick={()=>postUpload(fileContent)} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">Generate</button>
+          <button onClick={()=>postUpload(fileContent,setFileLink)} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">Generate</button>
+          {fileLink && <iframe src={fileLink.replace("/view?usp=sharing", "/export?format=pdf")} width="100%" height="500px"></iframe>}
         </div>
       ) : null}
     </>

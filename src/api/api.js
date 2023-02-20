@@ -32,7 +32,7 @@ export const postUrl = async (content) => {
     });
 };
 
-export const postUpload = async (content) => {
+export const postUpload = async (content,setFileLink) => {
   console.log("inside api.js", content);
   await api
     .post("/predict_upload",{
@@ -40,6 +40,7 @@ export const postUpload = async (content) => {
     })
     .then((res) => {
       console.log(res.data);
+      setFileLink(res.data.link);
     })
     .catch((err) => {
       console.log(err);
