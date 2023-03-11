@@ -3,27 +3,23 @@ import PropTypes from "prop-types";
 import "./fileupload.css";
 import { ImageConfig } from "./ImageConfig";
 import uploadImg from "../../assets/cloud-upload-regular-240.png";
-import { Box, Button, Center } from "@chakra-ui/react";
+import { Box, Card, CardBody, CardHeader, Center, Flex, Spacer, Stack, StackDivider, Text } from "@chakra-ui/react";
 import { postUpload } from "../../api/api";
-// import {PDFWorker, getDocument, GlobalWorkerOptions} from "pdfjs-dist";
-
-// import pdfjsLib from "pdfjs-dist";
+import LoadingSpin from "../LoadingSpin";
 
 const pdfjsLib = window["pdfjs-dist/build/pdf"];
-// GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
 
 const FileUpload = (props) => {
   const wrapperRef = useRef(null);
 
   const [fileList, setFileList] = useState([]);
-  const [fileLink, setFileLink] = useState("");
   
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
 
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
   
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
-  // var fileContent = {};
+
   const [fileContent, setFileContent] = useState({});
   
   const onFileDrop = (e) => {
@@ -34,31 +30,10 @@ const FileUpload = (props) => {
     if (newFile) {
       reader.onload = (event) => {
         console.log("file uploaded");
-        // console.log(event.target.result);
         const pdfData = new Uint8Array(reader.result);
         console.log(pdfData);
-        // // convert the array buffer to a string
-        // const data = new TextDecoder("utf-8").decode(buffer);
-
-        // // log the string to the console
-        // console.log(data);
-
-        // const worker = new PDFWorker();
 
         const loadingTask = pdfjsLib.getDocument({ data: pdfData });
-
-        // loadingTask.promise.then((pdf) => {
-        //   const numPages = pdf.numPages;
-        //   console.log(numPages);
-        //   for (let i = 1; i <= numPages; i++) {
-        //     pdf.getPage(i).then((page) => {
-        //       pdf.getTextContent().then((textContent) => {
-        //         const text = textContent.items.map((s) => s.str).join(" ");
-        //         console.log(text);
-        //       });
-        //     });
-        //   }
-        // });
 
         loadingTask.promise
           .then(function (doc) {
@@ -89,8 +64,6 @@ const FileUpload = (props) => {
                 return page
                   .getTextContent()
                   .then(function (content) {
-                    // Content contains lots of information about the text layout and
-                    // styles, but we need only strings at the moment
                     const strings = content.items.map(function (item) {
                       return item.str;
                     });
@@ -115,9 +88,7 @@ const FileUpload = (props) => {
           .then(
             function () {
               console.log("# End of Document");
-              // console.log(fileContent);
 
-              // send the page content to the backend
               props.onFileChange(fileContent);
             },
             function (err) {
@@ -133,31 +104,18 @@ const FileUpload = (props) => {
     }
   };
 
-  // const onFileDrop = async (e) => {
-  //     const newFile = e.target.files[0];
-  //     if (newFile) {
-  //         const formData = new FormData();
-  //         formData.append('file', newFile);
+  const [loading, setLoading] = useState(false);
+  const [generatedContent, setGeneratedContent] = useState('');
 
-  //         try {
-  //             const response = await fetch('/predict_upload', {
-  //                 method: 'POST',
-  //                 body: formData
-  //             });
-  //             if (response.ok) {
-  //                 const data = await response.json();
-  //                 const updatedList = [...fileList, data.fileUrl];
-  //                 setFileList(updatedList);
-  //                 props.onFileChange(updatedList);
-  //             } else {
-  //                 console.error('Failed to upload file');
-  //             }
-  //         } catch (error) {
-  //             console.error('Failed to upload file', error);
-  //         }
-  //     }
-  // }
-
+  const submitContent = async (e) => {
+    e.preventDefault();
+    console.log(fileContent);
+    setLoading(true);
+    const response = await postUpload(fileContent);
+    setGeneratedContent(response);
+    setLoading(false);
+  };
+  
   const fileRemove = (file) => {
     const updatedList = [...fileList];
     updatedList.splice(fileList.indexOf(file), 1);
@@ -204,10 +162,56 @@ const FileUpload = (props) => {
               </span>
             </div>
           ))}
-          <button onClick={()=>postUpload(fileContent,setFileLink)} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">Generate</button>
-          {fileLink && <iframe src={fileLink.replace("/view?usp=sharing", "/export?format=pdf")} width="100%" height="500px"></iframe>}
+          <button onClick={submitContent} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">Generate</button>
         </div>
       ) : null}
+      {loading && <LoadingSpin />}
+      {generatedContent && (
+        <div className="my-5">
+          <Card variant={'filled'}>
+            <CardHeader>
+              <h2 className="font-bold text-zinc-700 lg:text-2xl md:text-xl text-lg py-3">Generated Content</h2>
+            </CardHeader>
+
+            <CardBody>
+              <Stack divider={<StackDivider />} spacing='5'>
+                <Box>
+                  <h2 className="font-bold text-zinc-700 lg:text-lg md:text-lg text-md">
+                    Presentation Slide
+                  </h2>
+                  <Flex>
+                    <Text pt='5' fontSize='md'>
+                      Your Presenatation Slide is now Ready!
+                    </Text>
+                    <Spacer/>
+                    <button className="border rounded md:px-5 px-2 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
+                      <a href={generatedContent.presentation_link} target="_blank" rel="noopener noreferrer">
+                          View Slide
+                      </a>
+                    </button>
+                  </Flex>
+                </Box>
+                <Box>
+                  <h2 className="font-bold text-zinc-700 lg:text-lg md:text-lg text-md">
+                    Video Presentation
+                  </h2>
+                  <Flex>
+                    <Text pt='5' fontSize='md'>
+                      Your Presenatation Video is now Ready!
+                    </Text>
+                    <Spacer/>
+                    <button className="border rounded md:px-4 px-1 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
+                      <a href={generatedContent.video_link} target="_blank" rel="noopener noreferrer">
+                          View Video
+                      </a>
+                    </button>
+                  </Flex>
+                </Box>
+              </Stack>
+            </CardBody>
+          </Card>
+        </div>
+      )}
     </>
   );
 };

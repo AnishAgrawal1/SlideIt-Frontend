@@ -3,9 +3,8 @@ import Sidebar from "./Sidebar";
 import { useState } from "react";
 import FileUpload from "./contentupload/fileupload";
 import LoadingSpin from "./LoadingSpin";
-import { postText, postUpload, postUrl } from "../api/api";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Spacer, Input } from '@chakra-ui/react'
-
+import { postText, postUrl } from "../api/api";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Spacer, Input, Card, Stack, CardBody, Text, CardHeader, StackDivider, Box } from '@chakra-ui/react'
 
 const AccountDashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -17,27 +16,30 @@ const AccountDashboard = () => {
     setFileContent(fileContent);
     console.log("file content updaded with value::");
     console.log(fileContent);
-
-    // dont post the file contents here
-    // postUpload(fileContent);
   }
   
   const [content, setContent] = useState('');
+  const [generatedContent, setGeneratedContent] = useState('');
   
-  const submitContent = (e) => {
+  const submitContent = async (e) => {
     e.preventDefault();
     console.log(content);
-    postUrl(content);
     setLoading(true);
-  }
+    const response = await postUrl(content);
+    setGeneratedContent(response);
+    setLoading(false);
+  };
 
   const [textcontent, settextContent] = useState('');
+  const [generatedTextContent, setGeneratedTextContent] = useState('');
   
-  const submittextContent = (e) => {
+  const submittextContent = async (e) => {
     e.preventDefault();
     console.log(textcontent);
-    postText(textcontent);
     setLoading(true);
+    const response = await postText(textcontent);
+    setGeneratedTextContent(response);
+    setLoading(false);
   }
 
 
@@ -79,7 +81,7 @@ const AccountDashboard = () => {
                                 <Flex className="my-5">
                                 <Input onChange={(e) => setContent(e.target.value)} className="border mr-3 w-full" size='md' placeholder="Enter URL here" type="text" />
                                 <Spacer/>
-                                <button onClick={submitContent} className="border rounded px-8 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">
+                                <button onClick={submitContent} className="border rounded px-8 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
                                   Generate
                                 </button>
                                 </Flex>
@@ -89,6 +91,52 @@ const AccountDashboard = () => {
                       </p>
                     </div>
                     {loading && <LoadingSpin />}
+                    {generatedContent && (
+                      <div className="my-5">
+                        <Card variant={'filled'}>
+                          <CardHeader>
+                            <h2 className="font-bold text-zinc-700 lg:text-2xl md:text-xl text-lg py-3">Generated Content</h2>
+                          </CardHeader>
+
+                          <CardBody>
+                            <Stack divider={<StackDivider />} spacing='5'>
+                              <Box>
+                                <h2 className="font-bold text-zinc-700 lg:text-lg md:text-lg text-md">
+                                  Presentation Slide
+                                </h2>
+                                <Flex>
+                                  <Text pt='5' fontSize='md'>
+                                    Your Presenatation Slide is now Ready!
+                                  </Text>
+                                  <Spacer/>
+                                  <button className="border rounded md:px-5 px-2 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
+                                    <a href={generatedContent.presentation_link} target="_blank" rel="noopener noreferrer">
+                                        View Slide
+                                    </a>
+                                  </button>
+                                </Flex>
+                              </Box>
+                              <Box>
+                                <h2 className="font-bold text-zinc-700 lg:text-lg md:text-lg text-md">
+                                  Video Presentation
+                                </h2>
+                                <Flex>
+                                  <Text pt='5' fontSize='md'>
+                                    Your Presenatation Video is now Ready!
+                                  </Text>
+                                  <Spacer/>
+                                  <button className="border rounded md:px-4 px-1 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
+                                    <a href={generatedContent.video_link} target="_blank" rel="noopener noreferrer">
+                                        View Video
+                                    </a>
+                                  </button>
+                                </Flex>
+                              </Box>
+                            </Stack>
+                          </CardBody>
+                        </Card>
+                      </div>
+                    )}
                   </TabPanel>
 
                   <TabPanel>
@@ -124,12 +172,58 @@ const AccountDashboard = () => {
                           value={textcontent}
                           onChange={(e) => settextContent(e.target.value)}
                         ></textarea>
-                        <button onClick={submittextContent} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black">
+                        <button onClick={submittextContent} className="border rounded px-8 my-5 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
                           Generate
                         </button>
                       </div>
                     </div>
                     {loading && <LoadingSpin />}
+                    {generatedTextContent && (
+                      <div className="my-5">
+                        <Card variant={'filled'}>
+                          <CardHeader>
+                            <h2 className="font-bold text-zinc-700 lg:text-2xl md:text-xl text-lg py-3">Generated Content</h2>
+                          </CardHeader>
+
+                          <CardBody>
+                            <Stack divider={<StackDivider />} spacing='4'>
+                              <Box>
+                                <h2 className="font-bold text-zinc-700 lg:text-lg md:text-lg text-md">
+                                  Presentation Slide
+                                </h2>
+                                <Flex>
+                                  <Text pt='5' fontSize='md'>
+                                    Your Presenatation Slide is now Ready!
+                                  </Text>
+                                  <Spacer/>
+                                  <button className="border rounded px-8 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
+                                    <a href={generatedTextContent.presentation_link} target="_blank" rel="noopener noreferrer">
+                                        View Slide
+                                    </a>
+                                  </button>
+                                </Flex>
+                              </Box>
+                              <Box>
+                                <h2 className="font-bold text-zinc-700 lg:text-lg md:text-lg text-md">
+                                  Video Presentation
+                                </h2>
+                                <Flex>
+                                  <Text pt='5' fontSize='md'>
+                                    Your Presenatation Video is now Ready!
+                                  </Text>
+                                  <Spacer/>
+                                  <button className="border rounded px-8 py-2 bg-[#00df9a] hover:bg-[#00df98bc] text-black font-semibold">
+                                    <a href={generatedTextContent.video_link} target="_blank" rel="noopener noreferrer">
+                                        View Video
+                                    </a>
+                                  </button>
+                                </Flex>
+                              </Box>
+                            </Stack>
+                          </CardBody>
+                        </Card>
+                      </div>
+                    )}
                   </TabPanel>
                 </TabPanels>
               </Tabs>

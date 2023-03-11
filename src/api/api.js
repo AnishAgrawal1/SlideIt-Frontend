@@ -7,42 +7,39 @@ const api = axios.create({
 });
 
 export const postText = async (content) => {
-  await api
-    .post("/predict_text",{
-        'data': content
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
+  try {
+    const res = await api.post("/predict_text",{
+      'data': content
     });
+    console.log(res.data);
+    return res.data.link;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const postUrl = async (content) => {
-  await api
-    .post("/predict_url",{
-        'url': content
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
+  try {
+    const res = await api.post("/predict_url",{
+      'url': content
     });
+    console.log(res.data);
+    return res.data.link;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export const postUpload = async (content,setFileLink) => {
+export const postUpload = async (content) => {
   console.log("inside api.js", content);
-  await api
-    .post("/predict_upload",{
-        'upload': content
-    })
-    .then((res) => {
-      console.log(res.data);
-      setFileLink(res.data.link);
-    })
-    .catch((err) => {
-      console.log(err);
+  try {
+    const res = await api.post("/predict_upload",{
+      'upload': content
     });
+    console.log(res.data);
+    // setFileLink(res.data.link);
+    return res.data.link;
+  } catch (err) {
+    console.log(err);
+  }
 };
